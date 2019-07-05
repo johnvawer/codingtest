@@ -18,6 +18,9 @@ services:
       context: .
     ports:
       - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules/
     depends_on:
       - "db"
     environment:
