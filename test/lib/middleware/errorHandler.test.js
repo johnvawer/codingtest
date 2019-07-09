@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 const errorHandler = require("../../../lib/middleware/errorHandler");
 
-describe("error handler middleware", () => {
+describe("error handler middleware", function () {
   beforeEach(function () {
     res = {};
     res.json = sinon.fake.returns(res);

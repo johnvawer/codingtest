@@ -8,8 +8,8 @@ const expect = chai.expect;
 chai.should();
 chai.use(sinonChai);
 
-describe("mysql util", () => {
-  it("should create a new mysql pool", () => {
+describe("mysql util", function () {
+  it("should create a new mysql pool", function () {
     const createPoolStub = sinon.stub().returns({});
     proxyquire("../../../lib/utils/mysql.js", {
       mysql: {

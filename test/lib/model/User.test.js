@@ -10,8 +10,8 @@ chai.use(sinonChai);
 
 const User = require("../../../lib/model/User");
 
-describe("User Model", () => {
-  it("should assign the properties passed in correctly", () => {
+describe("User Model", function () {
+  it("should assign the properties passed in correctly", function () {
     const user = new User({
       email: "email@email.com",
       givenName: "test1",
@@ -25,8 +25,8 @@ describe("User Model", () => {
     expect(user.created).to.be.null;
   });
 
-  describe("mapDatabaseResult", () => {
-    it("create a new instance of user based on a result from the database", () => {
+  describe("mapDatabaseResult", function () {
+    it("create a new instance of user based on a result from the database", function () {
       const createdDate = new Date();
       const user = User.mapDatabaseResult({
         id: 1,
@@ -44,15 +44,15 @@ describe("User Model", () => {
     })
   });
 
-  describe("validateEmailAddress", () => {
-    it("should fail if passed invalid format", () => {
+  describe("validateEmailAddress", function () {
+    it("should fail if passed invalid format", function () {
       const user = new User({ email: "email@email", givenName: "test", familyName: "test" });
       const invalidEmailResult = user.validateEmailAddress();
 
       expect(invalidEmailResult).to.equal(false);
     });
 
-    it("should pass if passed a valid format", () => {
+    it("should pass if passed a valid format", function () {
       const user = new User({ email: "email@email.com", givenName: "test", familyName: "test" });
       const validEmailResult = user.validateEmailAddress();
 
@@ -60,8 +60,8 @@ describe("User Model", () => {
     });
   });
 
-  describe("validate", () => {
-    it("should fail if email is doesn't exist", () => {
+  describe("validate", function () {
+    it("should fail if email is doesn't exist", function () {
       const user = new User({ email: "", givenName: "test", familyName: "test" })
       const validateResult = user.validate();
       expect(validateResult).to.not.be.null;
@@ -71,7 +71,7 @@ describe("User Model", () => {
       expect(validateResult2).to.not.be.null;
     });
 
-    it("should fail if givenName is blank", () => {
+    it("should fail if givenName is blank", function () {
       const user = new User({ email: "email@email.com", givenName: "", familyName: "test" })
       const validateResult = user.validate();
       expect(validateResult).to.not.be.null;
@@ -81,7 +81,7 @@ describe("User Model", () => {
       expect(validateResult2).to.not.be.null;
     });
 
-    it("should fail if familyName is blank or null", () => {
+    it("should fail if familyName is blank or null", function () {
       const user = new User({ email: "email@email.com", givenName: "test", familyName: "" })
       const validateResult = user.validate();
       expect(validateResult).to.not.be.null;
@@ -91,14 +91,14 @@ describe("User Model", () => {
       expect(validateResult2).to.not.be.null;
     });
 
-    it("should pass if all values are provided and email is correct format", () => {
+    it("should pass if all values are provided and email is correct format", function () {
       const user = new User({ email: "email@email.com", givenName: "test", familyName: "test" })
       const validateResult = user.validate();
       expect(validateResult).to.be.null;
     });
   });
 
-  describe("save", () => {
+  describe("save", function () {
     it("should reject with an error if validation fails", async () => {
       const queryStub = sinon.stub().yields(null, { insertId: 1 });
       const proxyQuiredUser = proxyquire("../../../lib/model/User.js", {
@@ -118,7 +118,7 @@ describe("User Model", () => {
     });
   });
 
-  describe("getById", () => {
+  describe("getById", function () {
     it("should create correct sql", async () => {
       const queryStub = sinon.stub().yields(null, [{ id: 1 }]);
       const proxyQuiredUser = proxyquire("../../../lib/model/User.js", {
@@ -151,7 +151,7 @@ describe("User Model", () => {
     });
   });
 
-  describe("deleteById", () => {
+  describe("deleteById", function () {
     it("should create correct sql", async () => {
       const queryStub = sinon.stub().yields(null, { affectedRows: 1 });
       const proxyQuiredUser = proxyquire("../../../lib/model/User.js", {
